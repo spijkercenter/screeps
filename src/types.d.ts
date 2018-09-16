@@ -3,8 +3,8 @@
 // memory extension samples
 interface CreepMemory {
   role: string;
-  room: string;
-  working: boolean;
+  state: string;
+  destination: RoomObject;
 }
 
 interface Memory {
@@ -17,4 +17,16 @@ declare namespace NodeJS {
   interface Global {
     log: any;
   }
+}
+
+interface Room {
+  getSources(): Source[];
+  tick(): void;
+  drawRect(pos: RoomPosition): void;
+}
+
+interface RoomPosition {
+  getNeighbors(radius: number, predicate?: (pos: RoomPosition) => boolean): RoomPosition[];
+  getFreeNeighbors(radius: number): RoomPosition[];
+  isFree(): boolean;
 }
